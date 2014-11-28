@@ -5,7 +5,7 @@ GD-Rabbit library
 
 ###### constructor param - object with following keys:
  * logger - logger object, must implement error method, default: console
- * rabbit - rabbitmq params: object with following keys: host, port, autoReconnect, noLocal
+ * rabbit - rabbitmq params: object with following keys: host, port, user, password, exchangeName, autoReconnect, noLocal - see description below
  
 ###### methods:
  * sendMessage(channel, message) - sends message to channel, message param should be object with 2 keys: action (string) and data or object of gdMBMessage
@@ -15,9 +15,12 @@ GD-Rabbit library
  * connect
  * disconnect 
  
-###### rabbitmq params object (for gdMessageBus contructor):
+###### rabbit param object (for gdRabbit contructor):
  * host [string] - host of rabbitmq server, default: localhost
  * port [int] - port of rabbitmq server, default: 5672
+ * user [guest] - rabbitmq user
+ * password [guest] - rabbitmq password for user
+ * excahnge [gd_exchange] - rabbitmq exchange name
  * autoReconnect [boolean] - can reconnect on connection lost, default: true
  * noLocal [boolean] -  don't handle messages sent by me, default: true
  
@@ -52,11 +55,11 @@ gdRabbitObj.connect();
 
 //send message after 5secs to test channel with routing key: test and some cutom data
 setTimeout(function() {
-	gdMessageBusObj.sendMessage('test', {asd: 123, zxc: 345});
+	gdRabbitObj.sendMessage('test', {asd: 123, zxc: 345});
 }, 5000);
 
 setTimeout(function() {
-	gdMessageBusObj.sendMessage('test.give', 49685);
+	gdRabbitObj.sendMessage('test.give', 49685);
 }, 6000);
 
 ```
