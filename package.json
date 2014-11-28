@@ -1,0 +1,12 @@
+{
+	"name": "gd_rabbit",
+	"description": "GD-Rabbit library to handle messages via rabbitmq",
+	"version": "0.0.1",
+	"private": true,
+	"main": "index.js",
+	"dependencies": {
+		"amqplib": "0.3.x",
+		"lodash": "2.4.x",
+		"async": "0.9.x"
+	}
+}
